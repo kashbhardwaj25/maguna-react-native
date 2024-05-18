@@ -1,10 +1,15 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text} from 'react-native';
+import {QueryClient, QueryClientProvider} from '@tanstack/react-query';
 
 function App(): React.JSX.Element {
+  const queryClient = new QueryClient();
+
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
-      <Text>Maguna</Text>
+      <QueryClientProvider client={queryClient}>
+        <Text>Maguna</Text>
+      </QueryClientProvider>
     </SafeAreaView>
   );
 }
