@@ -5,10 +5,11 @@
   "scripts": {
     "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "lint": "eslint .",
-    "start": "react-native start",
+    "lint": "eslint . --max-warnings=0",
+    "start": "npm run lint && react-native start",
     "test": "jest",
-    "generate": "graphql-codegen"
+    "generate": "graphql-codegen",
+    "prepare": "husky"
   },
   "dependencies": {
     "@react-native-async-storage/async-storage": "^1.23.1",
@@ -44,6 +45,7 @@
     "@types/react-test-renderer": "^18.0.0",
     "babel-jest": "^29.6.3",
     "eslint": "^8.19.0",
+    "husky": "^9.0.11",
     "jest": "^29.6.3",
     "prettier": "2.8.8",
     "react-test-renderer": "18.2.0",
