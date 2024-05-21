@@ -6,4 +6,4 @@ npm run lint ||
 )
 
 # If everything passes... Now we can commit
-echo '✅✅✅✅ You win this time... I am committing this now. No errors and warnings will stay alive on FIFO!!! ✅✅✅✅'
+echo '✅✅✅✅ You win this time... I am committing this now. No errors and warnings will stay alive in this project!!! ✅✅✅✅'
