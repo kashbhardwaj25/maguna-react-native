@@ -8,7 +8,7 @@ function App(): React.JSX.Element {
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <QueryClientProvider client={queryClient}>
-        <Text>Maguna</Text>
+        <Text style={styles.customFontText}>Maguna</Text>
       </QueryClientProvider>
     </SafeAreaView>
   );
@@ -18,6 +18,10 @@ const styles = StyleSheet.create({
   safeAreaViewContainer: {
     backgroundColor: 'white',
     flex: 1,
+  },
+  customFontText: {
+    fontFamily: 'Poppins-Regular',
+    fontSize: 20,
   },
 });
 
