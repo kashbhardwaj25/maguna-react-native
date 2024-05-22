@@ -1,4 +1,4 @@
-import { SafeAreaView, Text } from 'react-native';
+import { Button, SafeAreaView } from 'react-native';
 
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
 
@@ -7,11 +7,12 @@ interface SignUpProps {
 }
 
 const SignUp = ({ navigation }: SignUpProps) => {
-  console.log(navigation);
-
   return (
     <SafeAreaView>
-      <Text>SignUp</Text>
+      <Button
+        title="Already have an account? Login here."
+        onPress={() => navigation.navigate('SignUp')}
+      />
     </SafeAreaView>
   );
 };
