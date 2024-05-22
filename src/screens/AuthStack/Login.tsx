@@ -32,7 +32,7 @@ const Login = ({ navigation }: LoginScreenProps) => {
   };
 
   const handleRegister = () => {
-    navigation.navigate('VerifyEmail');
+    navigation.navigate('SignUp');
   };
 
   return (
