@@ -1,48 +1,23 @@
-// import { SafeAreaView, Text } from 'react-native';
-
-// import { VerifyEmailScreenNavigationProp } from '../../types/navigationTypes';
-
-// interface VerifyEmailProps {
-//   navigation: VerifyEmailScreenNavigationProp;
-// }
-
-// const VerifyEmail = ({ navigation }: VerifyEmailProps) => {
-//   console.log(navigation);
-
-//   return (
-//     <SafeAreaView>
-//       <Text>VerifyEmail</Text>
-//     </SafeAreaView>
-//   );
-// };
-
-// export default VerifyEmail;
-
-import React from 'react';
 import {
   View,
-  TextInput,
-  Button,
   Text,
+  Button,
+  TextInput,
   StyleSheet,
   TouchableOpacity,
 } from 'react-native';
 import { Formik } from 'formik';
-import * as Yup from 'yup';
+import { object, string } from 'yup';
 
-// Define the shape of the form values
 interface OTPFormValues {
   otp: string;
 }
-
-// Define the initial form values
 const initialValues: OTPFormValues = {
   otp: '',
 };
 
-// Define the validation schema using Yup
-const validationSchema = Yup.object({
-  otp: Yup.string()
+const validationSchema = object({
+  otp: string()
     .length(6, 'OTP must be exactly 6 digits')
     .required('OTP is required'),
 });
