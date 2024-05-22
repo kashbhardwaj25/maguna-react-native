@@ -1188,6 +1188,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - RNKeychain (8.2.0):
+    - React-Core
   - RNReanimated (3.9.0):
     - DoubleConversion
     - glog
@@ -1293,6 +1295,7 @@ DEPENDENCIES:
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - "RNCAsyncStorage (from `../node_modules/@react-native-async-storage/async-storage`)"
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNKeychain (from `../node_modules/react-native-keychain`)
   - RNReanimated (from `../node_modules/react-native-reanimated`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -1415,6 +1418,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/@react-native-async-storage/async-storage"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNKeychain:
+    :path: "../node_modules/react-native-keychain"
   RNReanimated:
     :path: "../node_modules/react-native-reanimated"
   RNScreens:
@@ -1430,7 +1435,7 @@ SPEC CHECKSUMS:
   glog: c5d68082e772fa1c511173d6b30a9de2c05a69a2
   hermes-engine: 6eae7edb2f563ee41d7c1f91f4f2e57c26d8a5c3
   RCT-Folly: 045d6ecaa59d826c5736dfba0b2f4083ff8d79df
-  RCTDeprecation: e7c3bd8949701d472f32e92da0f1e95a1268d479
+  RCTDeprecation: 3ca8b6c36bfb302e1895b72cfe7db0de0c92cd47
   RCTRequired: 9fc183af555fd0c89a366c34c1ae70b7e03b1dc5
   RCTTypeSafety: db1dd5ad1081a5e160d30bb29ef922693d5ac4b1
   React: 8650d592d90b99097504b8dcfebab883972aed71
@@ -1479,6 +1484,7 @@ SPEC CHECKSUMS:
   ReactCommon: 2cde697fd80bd31da1d6448d25a5803088585219
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNGestureHandler: 4d271a5d9178403bd8dae0d853e2be21cf53743c
+  RNKeychain: bfe3d12bf4620fe488771c414530bf16e88f3678
   RNReanimated: 5fe9e4e22610ec906856da8dde7ea6815dd0cee2
   RNScreens: b32a9ff15bea7fcdbe5dff6477bc503f792b1208
   SocketRocket: abac6f5de4d4d62d24e11868d7a2f427e0ef940d
@@ -1486,4 +1492,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 9444c98670870b8a1e1c96cf876bb71eb188b76d
 
-COCOAPODS: 1.12.1
+COCOAPODS: 1.15.2
