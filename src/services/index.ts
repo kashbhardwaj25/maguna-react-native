@@ -1,7 +1,7 @@
 // import { GraphQLClient } from 'graphql-request';
 
 // import envConfig from '../../utils/envConfig';
-// import { getTokens } from '../../utils/tokenHelper';
+// import { getTokens } from '../../utils/tokensHelper';
 
 // type API_SERVICE = 'magunaServer';
 
