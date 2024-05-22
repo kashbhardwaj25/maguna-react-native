@@ -7,22 +7,18 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Formik } from 'formik';
-import { object, string } from 'yup';
+
+import { otpFormValidationSchema } from '../../utils/formValidations';
 
 interface OTPFormValues {
   otp: string;
 }
-const initialValues: OTPFormValues = {
-  otp: '',
-};
-
-const validationSchema = object({
-  otp: string()
-    .length(6, 'OTP must be exactly 6 digits')
-    .required('OTP is required'),
-});
 
 const VerifyEmail = () => {
+  const initialValues: OTPFormValues = {
+    otp: '',
+  };
+
   const handleOTPVerification = (values: OTPFormValues) => {
     console.log('OTP values:', values);
   };
@@ -34,7 +30,7 @@ const VerifyEmail = () => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={otpFormValidationSchema}
       onSubmit={handleOTPVerification}>
       {({
         handleChange,

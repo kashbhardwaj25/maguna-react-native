@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
-import { object, string } from 'yup';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 
 import { LoginScreenNavigationProp } from '../../types/navigationTypes';
+import { loginFormValidationSchema } from '../../utils/formValidations';
 
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProp;
@@ -14,19 +14,12 @@ interface LoginFormValues {
   password: string;
 }
 
-const initialValues: LoginFormValues = {
-  email: '',
-  password: '',
-};
-
-const validationSchema = object({
-  email: string().email('Invalid email address').required('Email is required'),
-  password: string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-});
-
 const Login = ({ navigation }: LoginScreenProps) => {
+  const initialValues: LoginFormValues = {
+    email: '',
+    password: '',
+  };
+
   const handleLogin = (values: LoginFormValues) => {
     console.log('Login values:', values);
   };
@@ -38,7 +31,7 @@ const Login = ({ navigation }: LoginScreenProps) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={loginFormValidationSchema}
       onSubmit={handleLogin}>
       {({
         handleChange,

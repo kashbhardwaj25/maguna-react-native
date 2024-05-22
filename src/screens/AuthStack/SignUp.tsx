@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Formik } from 'formik';
-import { string, object } from 'yup';
 
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
+import { signUpFormValidationSchema } from '../../utils/formValidations';
 
 interface SignUpProps {
   navigation: SignUpScreenNavigationProp;
@@ -21,21 +21,13 @@ interface RegisterFormValues {
   password: string;
 }
 
-const initialValues: RegisterFormValues = {
-  name: '',
-  email: '',
-  password: '',
-};
-
-const validationSchema = object({
-  name: string().required('Name is required'),
-  email: string().email('Invalid email address').required('Email is required'),
-  password: string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-});
-
 const SignUp = ({ navigation }: SignUpProps) => {
+  const initialValues: RegisterFormValues = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
   const handleRegister = (values: RegisterFormValues) => {
     console.log('Register values:', values);
   };
@@ -47,7 +39,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={signUpFormValidationSchema}
       onSubmit={handleRegister}>
       {({
         handleChange,
