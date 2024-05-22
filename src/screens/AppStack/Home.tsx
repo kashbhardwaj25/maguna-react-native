@@ -1,6 +1,14 @@
 import { SafeAreaView, Text } from 'react-native';
 
-const Home = () => {
+import { HomeScreenNavigationProp } from '../../types/navigationTypes';
+
+interface HomeScreenProps {
+  navigation: HomeScreenNavigationProp;
+}
+
+const Home = ({ navigation }: HomeScreenProps) => {
+  console.log(navigation);
+
   return (
     <SafeAreaView>
       <Text>Home</Text>

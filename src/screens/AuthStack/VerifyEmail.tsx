@@ -1,6 +1,14 @@
 import { SafeAreaView, Text } from 'react-native';
 
-const VerifyEmail = () => {
+import { VerifyEmailScreenNavigationProp } from '../../types/navigationTypes';
+
+interface VerifyEmailProps {
+  navigation: VerifyEmailScreenNavigationProp;
+}
+
+const VerifyEmail = ({ navigation }: VerifyEmailProps) => {
+  console.log(navigation);
+
   return (
     <SafeAreaView>
       <Text>VerifyEmail</Text>
