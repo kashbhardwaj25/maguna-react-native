@@ -13,7 +13,7 @@ import { TypedDocumentNode as DocumentNode } from '@graphql-typed-document-node/
  * Therefore it is highly recommended to use the babel or swc plugin for production.
  */
 const documents = {
-    "query me {\n  me {\n    id\n    name\n    email\n  }\n}": types.MeDocument,
+    "mutation register($name: String!, $email: String!, $password: String!) {\n  register(input: {name: $name, email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n    }\n  }\n}\n\nmutation login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n      name\n      email\n    }\n  }\n}\n\nmutation verifyEmail($otp: Int) {\n  verifyEmail(otp: $otp)\n}\n\nmutation resendVerificationEmail {\n  resendVerificationEmail\n}\n\nquery me {\n  me {\n    id\n    name\n    email\n  }\n}": types.RegisterDocument,
 };
 
 /**
@@ -33,7 +33,7 @@ export function graphql(source: string): unknown;
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
-export function graphql(source: "query me {\n  me {\n    id\n    name\n    email\n  }\n}"): (typeof documents)["query me {\n  me {\n    id\n    name\n    email\n  }\n}"];
+export function graphql(source: "mutation register($name: String!, $email: String!, $password: String!) {\n  register(input: {name: $name, email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n    }\n  }\n}\n\nmutation login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n      name\n      email\n    }\n  }\n}\n\nmutation verifyEmail($otp: Int) {\n  verifyEmail(otp: $otp)\n}\n\nmutation resendVerificationEmail {\n  resendVerificationEmail\n}\n\nquery me {\n  me {\n    id\n    name\n    email\n  }\n}"): (typeof documents)["mutation register($name: String!, $email: String!, $password: String!) {\n  register(input: {name: $name, email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n    }\n  }\n}\n\nmutation login($email: String!, $password: String!) {\n  login(input: {email: $email, password: $password}) {\n    accessToken\n    user {\n      id\n      name\n      email\n    }\n  }\n}\n\nmutation verifyEmail($otp: Int) {\n  verifyEmail(otp: $otp)\n}\n\nmutation resendVerificationEmail {\n  resendVerificationEmail\n}\n\nquery me {\n  me {\n    id\n    name\n    email\n  }\n}"];
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
