@@ -1,10 +1,22 @@
-import { SafeAreaView, Text } from 'react-native';
+import { createStackNavigator } from '@react-navigation/stack';
+import { NavigationContainer } from '@react-navigation/native';
+
+import Login from './Login';
+import SignUp from './SignUp';
+import VerifyEmail from './VerifyEmail';
+import { RootAuthStackParamList } from '../../types/navigationTypes';
+
+const Stack = createStackNavigator<RootAuthStackParamList>();
 
 const AuthStack = () => {
   return (
-    <SafeAreaView>
-      <Text>Auth Stack</Text>
-    </SafeAreaView>
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName="Login">
+        <Stack.Screen name="Login" component={Login} />
+        <Stack.Screen name="SignUp" component={SignUp} />
+        <Stack.Screen name="VerifyEmail" component={VerifyEmail} />
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
