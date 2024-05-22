@@ -20,7 +20,7 @@ export async function getAccessToken() {
   }
 }
 
-export async function setToken(token: string) {
+export async function setAccessToken(token: string) {
   try {
     await setGenericPassword(ACCESS_TOKEN, token);
   } catch (error) {
