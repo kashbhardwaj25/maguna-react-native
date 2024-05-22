@@ -1,18 +1,34 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { useEffect, useState } from 'react';
+import { SafeAreaView, StyleSheet, Text } from 'react-native';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 import AppStack from './screens/AppStack';
+import authStore from './store/authStore';
 import AuthStack from './screens/AuthStack';
+import { getAccessToken } from './utils/tokensHelper';
 
 const App = (): React.JSX.Element => {
   const queryClient = new QueryClient();
 
-  const token = false;
+  const [loading, setLoading] = useState(true);
+  const { setIsLoggedIn, isLoggedIn } = authStore();
+
+  useEffect(() => {
+    getAccessToken().then(accessToken => {
+      if (accessToken) {
+        setIsLoggedIn(true);
+      }
+
+      setLoading(false);
+    });
+  }, []);
+
+  if (loading) return <Text>Loading...</Text>;
 
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
       <QueryClientProvider client={queryClient}>
-        {token ? <AppStack /> : <AuthStack />}
+        {isLoggedIn ? <AppStack /> : <AuthStack />}
       </QueryClientProvider>
     </SafeAreaView>
   );

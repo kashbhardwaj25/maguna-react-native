@@ -50,9 +50,11 @@ const Login = ({ navigation }: LoginScreenProps) => {
             value={values.email}
             keyboardType="email-address"
           />
+
           {touched.email && errors.email && (
             <Text style={styles.errorText}>{errors.email}</Text>
           )}
+
           <TextInput
             style={styles.input}
             placeholder="Password"
@@ -61,11 +63,14 @@ const Login = ({ navigation }: LoginScreenProps) => {
             value={values.password}
             secureTextEntry
           />
+
           {touched.password && errors.password && (
             <Text style={styles.errorText}>{errors.password}</Text>
           )}
+
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <Button onPress={handleSubmit as any} title="Login" />
+
           <TouchableOpacity onPress={handleRegister}>
             <Text style={styles.registerText}>New user? Register here.</Text>
           </TouchableOpacity>
