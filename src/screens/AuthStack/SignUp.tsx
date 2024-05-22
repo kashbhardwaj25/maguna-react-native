@@ -11,7 +11,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
     <SafeAreaView>
       <Button
         title="Already have an account? Login here."
-        onPress={() => navigation.navigate('SignUp')}
+        onPress={() => navigation.navigate('Login')}
       />
     </SafeAreaView>
   );

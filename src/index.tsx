@@ -7,7 +7,7 @@ import AuthStack from './screens/AuthStack';
 const App = (): React.JSX.Element => {
   const queryClient = new QueryClient();
 
-  const token = true;
+  const token = false;
 
   return (
     <SafeAreaView style={styles.safeAreaViewContainer}>
