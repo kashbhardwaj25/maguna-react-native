@@ -8,8 +8,12 @@ import {
 } from 'react-native';
 import { Formik } from 'formik';
 
+import authStore from '../../store/authStore';
+import graphqlRequestClient from '../../services';
+import { setAccessToken } from '../../utils/tokensHelper';
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
 import { signUpFormValidationSchema } from '../../utils/formValidations';
+import { useRegisterMutation } from '../../services/api/magunaServer';
 
 interface SignUpProps {
   navigation: SignUpScreenNavigationProp;
@@ -28,8 +32,27 @@ const SignUp = ({ navigation }: SignUpProps) => {
     password: '',
   };
 
+  const { setIsLoggedIn } = authStore();
+
+  const { mutate } = useRegisterMutation(graphqlRequestClient(), {
+    onSuccess: async data => {
+      if (data.register.accessToken) {
+        await setAccessToken(data.register.accessToken);
+
+        console.log(data, '<<<<< API CALL SUCCESSFUL');
+
+        setIsLoggedIn(true);
+      }
+    },
+    onError: error => console.log(error),
+  });
+
   const handleRegister = (values: RegisterFormValues) => {
-    console.log('Register values:', values);
+    mutate({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   };
 
   const goToLoginScreen = () => {

@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   documents: ['./src/graphql/magunaServer/*.gql'],
   ignoreNoDocuments: true,
   generates: {
-    './src/services/api/': {
+    './src/services/api/magunaServer.ts': {
       plugins: [
         {
           add: {
@@ -21,7 +21,6 @@ const config: CodegenConfig = {
         exposeQueryKeys: true,
         exposeFetcher: true,
       },
-      preset: 'client',
     },
   },
 };
