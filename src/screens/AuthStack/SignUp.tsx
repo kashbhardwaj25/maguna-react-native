@@ -32,7 +32,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
     console.log('Register values:', values);
   };
 
-  const handleLogin = () => {
+  const goToLoginScreen = () => {
     navigation.navigate('Login');
   };
 
@@ -91,7 +91,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <Button onPress={handleSubmit as any} title="Register" />
 
-          <TouchableOpacity onPress={handleLogin}>
+          <TouchableOpacity onPress={goToLoginScreen}>
             <Text style={styles.loginText}>
               Already have an account? Login here.
             </Text>
