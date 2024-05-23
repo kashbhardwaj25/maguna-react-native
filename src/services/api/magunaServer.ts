@@ -136,9 +136,11 @@ export const useRegisterMutation = <
     ) => {
     
     return useMutation<RegisterMutation, TError, RegisterMutationVariables, TContext>(
-      ['register'],
-      (variables?: RegisterMutationVariables) => fetcher<RegisterMutation, RegisterMutationVariables>(client, RegisterDocument, variables, headers)(),
-      options
+      {
+    mutationKey: ['register'],
+    mutationFn: (variables?: RegisterMutationVariables) => fetcher<RegisterMutation, RegisterMutationVariables>(client, RegisterDocument, variables, headers)(),
+    ...options
+  }
     )};
 
 
@@ -167,9 +169,11 @@ export const useLoginMutation = <
     ) => {
     
     return useMutation<LoginMutation, TError, LoginMutationVariables, TContext>(
-      ['login'],
-      (variables?: LoginMutationVariables) => fetcher<LoginMutation, LoginMutationVariables>(client, LoginDocument, variables, headers)(),
-      options
+      {
+    mutationKey: ['login'],
+    mutationFn: (variables?: LoginMutationVariables) => fetcher<LoginMutation, LoginMutationVariables>(client, LoginDocument, variables, headers)(),
+    ...options
+  }
     )};
 
 
@@ -191,9 +195,11 @@ export const useVerifyEmailMutation = <
     ) => {
     
     return useMutation<VerifyEmailMutation, TError, VerifyEmailMutationVariables, TContext>(
-      ['verifyEmail'],
-      (variables?: VerifyEmailMutationVariables) => fetcher<VerifyEmailMutation, VerifyEmailMutationVariables>(client, VerifyEmailDocument, variables, headers)(),
-      options
+      {
+    mutationKey: ['verifyEmail'],
+    mutationFn: (variables?: VerifyEmailMutationVariables) => fetcher<VerifyEmailMutation, VerifyEmailMutationVariables>(client, VerifyEmailDocument, variables, headers)(),
+    ...options
+  }
     )};
 
 
@@ -215,9 +221,11 @@ export const useResendVerificationEmailMutation = <
     ) => {
     
     return useMutation<ResendVerificationEmailMutation, TError, ResendVerificationEmailMutationVariables, TContext>(
-      ['resendVerificationEmail'],
-      (variables?: ResendVerificationEmailMutationVariables) => fetcher<ResendVerificationEmailMutation, ResendVerificationEmailMutationVariables>(client, ResendVerificationEmailDocument, variables, headers)(),
-      options
+      {
+    mutationKey: ['resendVerificationEmail'],
+    mutationFn: (variables?: ResendVerificationEmailMutationVariables) => fetcher<ResendVerificationEmailMutation, ResendVerificationEmailMutationVariables>(client, ResendVerificationEmailDocument, variables, headers)(),
+    ...options
+  }
     )};
 
 
@@ -239,14 +247,16 @@ export const useMeQuery = <
     >(
       client: GraphQLClient,
       variables?: MeQueryVariables,
-      options?: UseQueryOptions<MeQuery, TError, TData>,
+      options?: Omit<UseQueryOptions<MeQuery, TError, TData>, 'queryKey'> & { queryKey?: UseQueryOptions<MeQuery, TError, TData>['queryKey'] },
       headers?: RequestInit['headers']
     ) => {
     
     return useQuery<MeQuery, TError, TData>(
-      variables === undefined ? ['me'] : ['me', variables],
-      fetcher<MeQuery, MeQueryVariables>(client, MeDocument, variables, headers),
-      options
+      {
+    queryKey: variables === undefined ? ['me'] : ['me', variables],
+    queryFn: fetcher<MeQuery, MeQueryVariables>(client, MeDocument, variables, headers),
+    ...options
+  }
     )};
 
 useMeQuery.getKey = (variables?: MeQueryVariables) => variables === undefined ? ['me'] : ['me', variables];

@@ -18,6 +18,7 @@ const config: CodegenConfig = {
       ],
       config: {
         fetcher: 'graphql-request',
+        reactQueryVersion: 5,
         exposeQueryKeys: true,
         exposeFetcher: true,
       },
