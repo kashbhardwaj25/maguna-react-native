@@ -7,9 +7,9 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import { Formik } from 'formik';
-import { string, object } from 'yup';
 
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
+import { signUpFormValidationSchema } from '../../utils/formValidations';
 
 interface SignUpProps {
   navigation: SignUpScreenNavigationProp;
@@ -21,33 +21,25 @@ interface RegisterFormValues {
   password: string;
 }
 
-const initialValues: RegisterFormValues = {
-  name: '',
-  email: '',
-  password: '',
-};
-
-const validationSchema = object({
-  name: string().required('Name is required'),
-  email: string().email('Invalid email address').required('Email is required'),
-  password: string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-});
-
 const SignUp = ({ navigation }: SignUpProps) => {
+  const initialValues: RegisterFormValues = {
+    name: '',
+    email: '',
+    password: '',
+  };
+
   const handleRegister = (values: RegisterFormValues) => {
     console.log('Register values:', values);
   };
 
-  const handleLogin = () => {
+  const goToLoginScreen = () => {
     navigation.navigate('Login');
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={signUpFormValidationSchema}
       onSubmit={handleRegister}>
       {({
         handleChange,
@@ -99,7 +91,7 @@ const SignUp = ({ navigation }: SignUpProps) => {
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <Button onPress={handleSubmit as any} title="Register" />
 
-          <TouchableOpacity onPress={handleLogin}>
+          <TouchableOpacity onPress={goToLoginScreen}>
             <Text style={styles.loginText}>
               Already have an account? Login here.
             </Text>

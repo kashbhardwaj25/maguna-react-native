@@ -1,9 +1,9 @@
 import { Formik } from 'formik';
-import { object, string } from 'yup';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { View, TextInput, Button, Text, StyleSheet } from 'react-native';
 
 import { LoginScreenNavigationProp } from '../../types/navigationTypes';
+import { loginFormValidationSchema } from '../../utils/formValidations';
 
 interface LoginScreenProps {
   navigation: LoginScreenNavigationProp;
@@ -14,31 +14,24 @@ interface LoginFormValues {
   password: string;
 }
 
-const initialValues: LoginFormValues = {
-  email: '',
-  password: '',
-};
-
-const validationSchema = object({
-  email: string().email('Invalid email address').required('Email is required'),
-  password: string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
-});
-
 const Login = ({ navigation }: LoginScreenProps) => {
+  const initialValues: LoginFormValues = {
+    email: '',
+    password: '',
+  };
+
   const handleLogin = (values: LoginFormValues) => {
     console.log('Login values:', values);
   };
 
-  const handleRegister = () => {
+  const goToRegisterScreen = () => {
     navigation.navigate('SignUp');
   };
 
   return (
     <Formik
       initialValues={initialValues}
-      validationSchema={validationSchema}
+      validationSchema={loginFormValidationSchema}
       onSubmit={handleLogin}>
       {({
         handleChange,
@@ -57,9 +50,11 @@ const Login = ({ navigation }: LoginScreenProps) => {
             value={values.email}
             keyboardType="email-address"
           />
+
           {touched.email && errors.email && (
             <Text style={styles.errorText}>{errors.email}</Text>
           )}
+
           <TextInput
             style={styles.input}
             placeholder="Password"
@@ -68,12 +63,15 @@ const Login = ({ navigation }: LoginScreenProps) => {
             value={values.password}
             secureTextEntry
           />
+
           {touched.password && errors.password && (
             <Text style={styles.errorText}>{errors.password}</Text>
           )}
+
           {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
           <Button onPress={handleSubmit as any} title="Login" />
-          <TouchableOpacity onPress={handleRegister}>
+
+          <TouchableOpacity onPress={goToRegisterScreen}>
             <Text style={styles.registerText}>New user? Register here.</Text>
           </TouchableOpacity>
         </View>
