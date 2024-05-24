@@ -11,9 +11,9 @@ import { Formik } from 'formik';
 import authStore from '../../store/authStore';
 import graphqlRequestClient from '../../services';
 import { setAccessToken } from '../../utils/tokensHelper';
+import { useRegisterMutation } from '../../services/api/magunaServer';
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
 import { signUpFormValidationSchema } from '../../utils/formValidations';
-import { useRegisterMutation } from '../../services/api/magunaServer';
 
 interface SignUpProps {
   navigation: SignUpScreenNavigationProp;
@@ -34,12 +34,10 @@ const SignUp = ({ navigation }: SignUpProps) => {
 
   const { setIsLoggedIn } = authStore();
 
-  const { mutate } = useRegisterMutation(graphqlRequestClient(), {
+  const { mutate, isPending } = useRegisterMutation(graphqlRequestClient(), {
     onSuccess: async data => {
       if (data.register.accessToken) {
         await setAccessToken(data.register.accessToken);
-
-        console.log(data, '<<<<< API CALL SUCCESSFUL');
 
         setIsLoggedIn(true);
       }
@@ -111,8 +109,12 @@ const SignUp = ({ navigation }: SignUpProps) => {
             <Text style={styles.errorText}>{errors.password}</Text>
           )}
 
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          <Button onPress={handleSubmit as any} title="Register" />
+          <Button
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            onPress={handleSubmit as any}
+            title="Register"
+            disabled={isPending}
+          />
 
           <TouchableOpacity onPress={goToLoginScreen}>
             <Text style={styles.loginText}>

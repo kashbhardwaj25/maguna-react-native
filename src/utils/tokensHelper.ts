@@ -34,7 +34,6 @@ export async function removeAccessToken() {
 
     if (credentials && credentials.username === BEARER_ACCESS_TOKEN) {
       await resetGenericPassword();
-    } else {
     }
   } catch (error) {
     console.log(`Could not remove token for ${BEARER_ACCESS_TOKEN}`, error);
