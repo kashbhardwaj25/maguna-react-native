@@ -1,7 +1,7 @@
 module.exports = {
   root: true,
   extends: '@react-native',
-  ignorePatterns: ['gql.ts', 'graphql.ts', 'fragment-masking.ts', 'index.js', '.eslintrc.js', 'metro.config.js'],
+  ignorePatterns: ['gql.ts', 'graphql.ts', 'fragment-masking.ts', 'index.js', '.eslintrc.js', 'metro.config.js', 'magunaServer.ts'],
   overrides: [
     {
       files: ['src/**/*.{ts,tsx,js,jsx}'],

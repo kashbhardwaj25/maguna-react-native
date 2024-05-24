@@ -8,6 +8,10 @@ import {
 } from 'react-native';
 import { Formik } from 'formik';
 
+import authStore from '../../store/authStore';
+import graphqlRequestClient from '../../services';
+import { setAccessToken } from '../../utils/tokensHelper';
+import { useRegisterMutation } from '../../services/api/magunaServer';
 import { SignUpScreenNavigationProp } from '../../types/navigationTypes';
 import { signUpFormValidationSchema } from '../../utils/formValidations';
 
@@ -28,8 +32,25 @@ const SignUp = ({ navigation }: SignUpProps) => {
     password: '',
   };
 
+  const { setIsLoggedIn } = authStore();
+
+  const { mutate, isPending } = useRegisterMutation(graphqlRequestClient(), {
+    onSuccess: async data => {
+      if (data.register.accessToken) {
+        await setAccessToken(data.register.accessToken);
+
+        setIsLoggedIn(true);
+      }
+    },
+    onError: error => console.log(error),
+  });
+
   const handleRegister = (values: RegisterFormValues) => {
-    console.log('Register values:', values);
+    mutate({
+      name: values.name,
+      email: values.email,
+      password: values.password,
+    });
   };
 
   const goToLoginScreen = () => {
@@ -88,8 +109,12 @@ const SignUp = ({ navigation }: SignUpProps) => {
             <Text style={styles.errorText}>{errors.password}</Text>
           )}
 
-          {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
-          <Button onPress={handleSubmit as any} title="Register" />
+          <Button
+            /* eslint-disable-next-line @typescript-eslint/no-explicit-any */
+            onPress={handleSubmit as any}
+            title="Register"
+            disabled={isPending}
+          />
 
           <TouchableOpacity onPress={goToLoginScreen}>
             <Text style={styles.loginText}>
